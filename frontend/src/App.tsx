@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-const Header = () => {
-  return <h1>Alpha beta app is running well!</h1>;
-};
-
 type GreekLetter = {
   name: string;
   greekLowercase: string;
@@ -219,7 +215,6 @@ const Alphabet = () => {
 function App() {
   return (
     <>
-      <Header />
       <Alphabet />
     </>
   );
