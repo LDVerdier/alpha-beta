@@ -1,7 +1,24 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 
-import { StyledFlippableCell } from './Cell';
+import { Cell } from './Cell';
 import { GREEK_LETTERS } from './GreekLetters';
+
+const StyledFlippableCell = styled(Cell)`
+  cursor: pointer;
+  width: 40%;
+  font-size: 32px;
+`;
+
+const StyledTable = styled.table`
+    width 100%;
+    max-width: 375px;
+    margin: 8px;
+`;
+
+const StyledRow = styled.tr`
+  width: 100%;
+`;
 
 type FlippableCellProps = { recto: string; verso: string };
 
@@ -20,7 +37,7 @@ const FlippableCell = ({ recto, verso }: FlippableCellProps) => {
 
 export const InteractiveAlphabet = () => {
   return (
-    <table>
+    <StyledTable>
       <tbody>
         {GREEK_LETTERS.map(
           (
@@ -33,14 +50,14 @@ export const InteractiveAlphabet = () => {
             index,
           ) => {
             return (
-              <tr key={index}>
+              <StyledRow key={index}>
                 <FlippableCell recto={greekLowercase} verso={frenchLowercase} />
                 <FlippableCell recto={greekUppercase} verso={frenchUppercase} />
-              </tr>
+              </StyledRow>
             );
           },
         )}
       </tbody>
-    </table>
+    </StyledTable>
   );
 };

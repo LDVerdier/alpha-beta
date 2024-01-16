@@ -1,7 +1,7 @@
-import { Alphabets } from './Alphabets';
+import { InteractiveAlphabet } from './Alphabets/InteractiveAlphabet';
 
 function App() {
-  return <Alphabets />;
+  return <InteractiveAlphabet />;
 }
 
 export default App;
