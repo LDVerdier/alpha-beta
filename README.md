@@ -32,3 +32,13 @@ Installe les packages
 ## Compiler
 
 `make build`
+
+## Déployer sur GCP
+
+Prérequis :
+- avoir un compte GCP
+- avoir créé un projet
+- avoir installé google cloud cli en local
+- avoir compilé le projet
+
+Se placer dans le répertoire `frontend` et lancer la commande `gcloud app deploy`.
