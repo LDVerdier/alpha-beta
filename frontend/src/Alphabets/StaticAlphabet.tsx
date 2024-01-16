@@ -1,9 +1,11 @@
-import { Cell } from './Cell';
-import { GREEK_LETTERS } from './GreekLetters';
+import { Link } from 'react-router-dom';
 
-export const StaticAlphabet = () => {
+import { GREEK_LETTERS } from './GreekLetters';
+import { Cell, StyledTable } from './Table';
+
+const StaticAlphabet = () => {
   return (
-    <table>
+    <StyledTable>
       <tbody>
         {GREEK_LETTERS.map(
           (
@@ -28,6 +30,15 @@ export const StaticAlphabet = () => {
           },
         )}
       </tbody>
-    </table>
+    </StyledTable>
+  );
+};
+
+export const StaticAlphabetContainer = () => {
+  return (
+    <>
+      <Link to="/exercice">Faire l'exercice</Link>
+      <StaticAlphabet />
+    </>
   );
 };

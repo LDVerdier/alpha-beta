@@ -1,23 +1,15 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Cell } from './Cell';
 import { GREEK_LETTERS } from './GreekLetters';
+import { Cell } from './Table';
+import { StyledTable } from './Table';
 
 const StyledFlippableCell = styled(Cell)`
   cursor: pointer;
   width: 40%;
   font-size: 32px;
-`;
-
-const StyledTable = styled.table`
-    width 100%;
-    max-width: 375px;
-    margin: 8px;
-`;
-
-const StyledRow = styled.tr`
-  width: 100%;
 `;
 
 type FlippableCellProps = { recto: string; verso: string };
@@ -35,7 +27,7 @@ const FlippableCell = ({ recto, verso }: FlippableCellProps) => {
   );
 };
 
-export const InteractiveAlphabet = () => {
+const InteractiveAlphabet = () => {
   return (
     <StyledTable>
       <tbody>
@@ -50,14 +42,23 @@ export const InteractiveAlphabet = () => {
             index,
           ) => {
             return (
-              <StyledRow key={index}>
+              <tr key={index}>
                 <FlippableCell recto={greekLowercase} verso={frenchLowercase} />
                 <FlippableCell recto={greekUppercase} verso={frenchUppercase} />
-              </StyledRow>
+              </tr>
             );
           },
         )}
       </tbody>
     </StyledTable>
+  );
+};
+
+export const InteractiveAlphabetContainer = () => {
+  return (
+    <>
+      <Link to="/">Voir le tableau</Link>
+      <InteractiveAlphabet />
+    </>
   );
 };
