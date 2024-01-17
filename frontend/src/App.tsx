@@ -1,22 +1,44 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { InteractiveAlphabetContainer } from './Alphabets/InteractiveAlphabet';
-import { StaticAlphabetContainer } from './Alphabets/StaticAlphabet';
-import { Error404 } from './views/Error404';
+import { InteractiveAlphabet } from './Alphabets/InteractiveAlphabet';
+import { StaticAlphabet } from './Alphabets/StaticAlphabet';
+import { Error404 } from './Layouts/Error404';
+import { Layout } from './Layouts/Layout';
+import { Summary } from './Summary';
 import { Words } from './Words/Words';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <StaticAlphabetContainer />,
+    element: (
+      <Layout>
+        <Summary />
+      </Layout>
+    ),
   },
   {
-    path: '/exercice',
-    element: <InteractiveAlphabetContainer />,
+    path: '/alphabet',
+    element: (
+      <Layout>
+        <StaticAlphabet />
+      </Layout>
+    ),
   },
   {
-    path: '/mots',
-    element: <Words />,
+    path: '/entrainement',
+    element: (
+      <Layout>
+        <InteractiveAlphabet />
+      </Layout>
+    ),
+  },
+  {
+    path: '/vocabulaire',
+    element: (
+      <Layout>
+        <Words />
+      </Layout>
+    ),
   },
   {
     path: '*',

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Cell } from '../views/Table';
@@ -27,7 +26,7 @@ const FlippableCell = ({ recto, verso }: FlippableCellProps) => {
   );
 };
 
-const InteractiveAlphabet = () => {
+export const InteractiveAlphabet = () => {
   return (
     <StyledTable>
       <tbody>
@@ -51,14 +50,5 @@ const InteractiveAlphabet = () => {
         )}
       </tbody>
     </StyledTable>
-  );
-};
-
-export const InteractiveAlphabetContainer = () => {
-  return (
-    <>
-      <Link to="/">Voir le tableau</Link>
-      <InteractiveAlphabet />
-    </>
   );
 };

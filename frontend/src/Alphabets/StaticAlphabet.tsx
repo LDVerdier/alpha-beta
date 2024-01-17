@@ -1,9 +1,7 @@
-import { Link } from 'react-router-dom';
-
 import { Cell, StyledTable } from '../views/Table';
 import { GREEK_LETTERS } from './GreekLetters';
 
-const StaticAlphabet = () => {
+export const StaticAlphabet = () => {
   return (
     <StyledTable>
       <tbody>
@@ -31,14 +29,5 @@ const StaticAlphabet = () => {
         )}
       </tbody>
     </StyledTable>
-  );
-};
-
-export const StaticAlphabetContainer = () => {
-  return (
-    <>
-      <Link to="/exercice">Faire l'exercice</Link>
-      <StaticAlphabet />
-    </>
   );
 };

@@ -21,23 +21,25 @@ const PlayButton = ({ pronunciation }: { pronunciation: string }) => {
 const Word = ({ word }: { word: GreekWord }) => {
   return (
     <tr>
-      <Cell>{word.spelling}</Cell>
-      <Cell>{word.translation}</Cell>
       <Cell>
         <PlayButton pronunciation={word.pronunciation} />
       </Cell>
+      <Cell>{word.spelling}</Cell>
+      <Cell>{word.translation}</Cell>
     </tr>
   );
 };
 
 export const Words = () => {
   return (
-    <StyledTable>
-      <tbody>
-        {GREEK_WORDS.map((greekWord) => {
-          return <Word key={greekWord.spelling} word={greekWord} />;
-        })}
-      </tbody>
-    </StyledTable>
+    <>
+      <StyledTable>
+        <tbody>
+          {GREEK_WORDS.map((greekWord) => {
+            return <Word key={greekWord.spelling} word={greekWord} />;
+          })}
+        </tbody>
+      </StyledTable>
+    </>
   );
 };
