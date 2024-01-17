@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { GREEK_LETTERS } from './GreekLetters';
-import { Cell } from './Table';
-import { StyledTable } from './Table';
+import { Cell } from '../views/Table';
+import { StyledTable } from '../views/Table';
 
 const StyledFlippableCell = styled(Cell)`
   cursor: pointer;
