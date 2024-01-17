@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { InteractiveAlphabetContainer } from './Alphabets/InteractiveAlphabet';
 import { StaticAlphabetContainer } from './Alphabets/StaticAlphabet';
+import { Error404 } from './views/Error404';
 import { Words } from './Words/Words';
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: '/mots',
     element: <Words />,
+  },
+  {
+    path: '*',
+    element: <Error404 />,
   },
 ]);
 

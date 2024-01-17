@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import { GREEK_LETTERS } from './GreekLetters';
 import { Cell, StyledTable } from '../views/Table';
+import { GREEK_LETTERS } from './GreekLetters';
 
 const StaticAlphabet = () => {
   return (

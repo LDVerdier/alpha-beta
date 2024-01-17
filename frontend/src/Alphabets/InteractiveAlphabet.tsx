@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { GREEK_LETTERS } from './GreekLetters';
 import { Cell } from '../views/Table';
 import { StyledTable } from '../views/Table';
+import { GREEK_LETTERS } from './GreekLetters';
 
 const StyledFlippableCell = styled(Cell)`
   cursor: pointer;
