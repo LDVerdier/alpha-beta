@@ -35,10 +35,4 @@ Installe les packages
 
 ## Déployer sur GCP
 
-Prérequis :
-- avoir un compte GCP
-- avoir créé un projet
-- avoir installé google cloud cli en local
-- avoir compilé le projet
-
-Se placer dans le répertoire `frontend` et lancer la commande `gcloud app deploy`.
+Le déploiement est automatisé avec CircleCI, avec une étape de validation manuelle dans l'interface de CircleCI. Le déploiement est possible lors de mises à jour de la branche main.
