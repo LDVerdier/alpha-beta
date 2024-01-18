@@ -34,6 +34,19 @@ jobs:
       - run:
           command: npm run build
           name: Build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
+  deploy:
+    # executor:
+    #   name: node/default
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          command: ls
+          name: Display list of elements retrieved from workspace
 
 workflows:
   frontend:
@@ -42,3 +55,6 @@ workflows:
       - build-frontend:
           requires:
             - lint-and-test-frontend
+      - deploy:
+          requires:
+            - build-frontend
