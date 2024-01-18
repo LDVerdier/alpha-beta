@@ -31,6 +31,9 @@ jobs:
       - run:
           command: ls
           name: Display list of elements retrieved from workspace
+      - run:
+          command: npm run build
+          name: Build
 
 workflows:
   frontend:
