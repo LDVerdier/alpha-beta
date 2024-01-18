@@ -39,14 +39,20 @@ jobs:
           paths:
             - dist
   deploy:
-    # executor:
-    #   name: node/default
+    docker:
+      - image: google/cloud-sdk
+        auth:
+          username: ldverdier
+          password: $DOCKERHUB_PASSWORD
     steps:
       - attach_workspace:
           at: .
       - run:
           command: ls
           name: Display list of elements retrieved from workspace
+      - run: |
+          echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 
 workflows:
   frontend:
