@@ -37,7 +37,7 @@ jobs:
             - dist
   deploy:
     docker:
-      - image: google/cloud-sdk
+      - image: google/cloud-sdk:460.0.0
     steps:
       - attach_workspace:
           at: .
