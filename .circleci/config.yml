@@ -2,6 +2,16 @@ version: '2.1'
 orbs:
   node: circleci/node@5.0.3
 jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.06
+    steps:
+      - checkout
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode
+
   lint-and-test-frontend:
     executor:
       name: node/default
@@ -20,6 +30,9 @@ jobs:
           working_directory: ~/project/frontend
 
 workflows:
+  test-env-vars:
+    jobs:
+      - build
   frontend:
     jobs:
       - lint-and-test-frontend
