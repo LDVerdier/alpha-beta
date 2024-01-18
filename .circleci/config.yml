@@ -1,4 +1,4 @@
-version: '2.1'
+version: 2.1
 orbs:
   node: circleci/node@5.0.3
 jobs:
@@ -18,22 +18,16 @@ jobs:
           command: npm run test
           name: Run unit tests
           working_directory: ~/project/frontend
-      - run:
-          command: echo $GOOGLE_PROJECT_ID
-          name: Display project id
       - persist_to_workspace:
           root: ./frontend
           paths:
             - .
-  build-frontend:
+  build:
     executor:
       name: node/default
     steps:
       - attach_workspace:
           at: .
-      - run:
-          command: ls
-          name: Display list of elements retrieved from workspace
       - run:
           command: npm run build
           name: Build
@@ -50,9 +44,6 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run:
-          command: ls
-          name: Display list of elements retrieved from workspace
       - run: |
           echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
@@ -62,9 +53,9 @@ workflows:
   frontend:
     jobs:
       - lint-and-test-frontend
-      - build-frontend:
+      - build:
           requires:
             - lint-and-test-frontend
       - deploy:
           requires:
-            - build-frontend
+            - build
