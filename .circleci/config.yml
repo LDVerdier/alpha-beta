@@ -54,6 +54,10 @@ workflows:
           type: approval
           requires:
             - lint-and-test
+          filters:
+            branches:
+              only:
+                - main
       - build:
           requires:
             - hold
