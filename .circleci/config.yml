@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
 jobs:
-  lint-and-test-frontend:
+  lint-and-test:
     executor:
       name: node/default
     steps:
@@ -49,10 +49,14 @@ jobs:
 workflows:
   frontend:
     jobs:
-      - lint-and-test-frontend
+      - lint-and-test
+      - hold:
+          type: approval
+          requires:
+            - lint-and-test
       - build:
           requires:
-            - lint-and-test-frontend
+            - hold
       - deploy:
           requires:
             - build
