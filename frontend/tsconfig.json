@@ -19,7 +19,7 @@
     "strict": true,
     "noFallthroughCasesInSwitch": true,
 
-    "types": ["jest", "@testing-library/jest-dom"]
+    "types": ["jest", "@testing-library/jest-dom", "selenium-webdriver"]
   },
   "include": ["src", "tests", "e2e-tests"]
 }
