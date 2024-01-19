@@ -2,9 +2,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { InteractiveAlphabet } from './Alphabets/InteractiveAlphabet';
 import { StaticAlphabet } from './Alphabets/StaticAlphabet';
+import { HomePage } from './HomePage';
 import { Error404 } from './Layouts/Error404';
 import { Layout } from './Layouts/Layout';
-import { Summary } from './Summary';
 import { Words } from './Words/Words';
 
 const router = createBrowserRouter([
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <Layout>
-        <Summary />
+        <HomePage />
       </Layout>
     ),
   },
@@ -42,7 +42,11 @@ const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <Error404 />,
+    element: (
+      <Layout>
+        <Error404 />
+      </Layout>
+    ),
   },
 ]);
 
