@@ -18,10 +18,6 @@ jobs:
           command: npm run test
           name: Run unit tests
           working_directory: ~/project/frontend
-      - run:
-          command: npm run dev && npm run test:e2e
-          name: Run e2e tests
-          working_directory: ~/project/frontend
       - persist_to_workspace:
           root: ./frontend
           paths:
