@@ -5,6 +5,7 @@ const config: Config = {
     '\\.(css|less)$': '<rootDir>/styleMock.js',
   },
   preset: 'ts-jest',
+  rootDir: './src/',
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testEnvironment: 'jsdom',
   testRegex: '.test.(ts|tsx)$',

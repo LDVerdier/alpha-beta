@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "jest --config=jest.unit-config.ts",
+    "test:e2e": "jest --config=jest.e2e-config.ts",
     "preview": "vite preview"
   },
   "dependencies": {

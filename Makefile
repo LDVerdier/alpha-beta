@@ -25,6 +25,8 @@ lint: ## Lint the frontend
 test: ## Unit tests for the frontend
 	@$(FRONTEND_RUN) npm run test
 
+test-e2e: ## E2E tests for the frontend
+	@$(FRONTEND_RUN) npm run test:e2e
 
 # Build commands
 
