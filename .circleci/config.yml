@@ -45,10 +45,12 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: |
-          echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
-          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          gcloud --quiet app deploy
+      - run: 
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet app deploy
+          name: Deploy to GCP App Engine
 
 workflows:
   frontend:
