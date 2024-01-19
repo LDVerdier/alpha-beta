@@ -22,6 +22,10 @@ jobs:
           root: ./frontend
           paths:
             - .
+      - persist_to_workspace:
+          root: ./.deployment/frontend
+          paths:
+            - app.yaml
   build:
     executor:
       name: node/default
