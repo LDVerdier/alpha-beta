@@ -61,7 +61,7 @@ jobs:
           command: |
             echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-            gcloud --quiet app deploy
+            gcloud --quiet app deploy --appyaml=frontend.yaml
           name: Deploy to GCP App Engine
       - run:
           command: gcloud app versions list --format="value(version.id)" --sort-by="~version.createTime" | tail -n +6 | xargs -r gcloud app versions delete --quiet
