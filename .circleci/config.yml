@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
 jobs:
-  lint-and-test:
+  lint-and-test-frontend:
     executor:
       name: node/default
     steps:
@@ -22,7 +22,23 @@ jobs:
           root: ./frontend
           paths:
             - .
-  build:
+  lint-and-test-backend:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          app-dir: ~/project/backend
+          pkg-manager: npm
+      - run:
+          command: npm run lint
+          name: Run linter
+          working_directory: ~/project/backend
+      - run:
+          command: npm run test
+          name: Run unit tests
+          working_directory: ~/project/backend
+  build-frontend:
     executor:
       name: node/default
     steps:
@@ -35,37 +51,40 @@ jobs:
           root: ./
           paths:
             - dist
-  deploy:
+  deploy-frontend:
     docker:
       - image: google/cloud-sdk:460.0.0
     steps:
       - attach_workspace:
           at: .
-      - run: 
+      - run:
           command: |
             echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet app deploy
           name: Deploy to GCP App Engine
-      - run: 
+      - run:
           command: gcloud app versions list --format="value(version.id)" --sort-by="~version.createTime" | tail -n +6 | xargs -r gcloud app versions delete --quiet
           name: Delete app versions beyond 5th version in history
 
 workflows:
   frontend:
     jobs:
-      - lint-and-test
+      - lint-and-test-frontend
       - hold:
           type: approval
           requires:
-            - lint-and-test
+            - lint-and-test-frontend
           filters:
             branches:
               only:
                 - main
-      - build:
+      - build-frontend:
           requires:
             - hold
-      - deploy:
+      - deploy-frontend:
           requires:
-            - build
+            - build-frontend
+  backend:
+    jobs:
+      - lint-and-test-backend
