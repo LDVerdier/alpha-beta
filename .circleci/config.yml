@@ -38,7 +38,24 @@ jobs:
           command: npm run test
           name: Run unit tests
           working_directory: ~/project/backend
+      - persist_to_workspace:
+          root: ./backend
+          paths:
+            - .
   build-frontend:
+    executor:
+      name: node/default
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          command: npm run build
+          name: Build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
+  build-backend:
     executor:
       name: node/default
     steps:
@@ -66,7 +83,21 @@ jobs:
       - run:
           command: gcloud app versions list --format="value(version.id)" --sort-by="~version.createTime" | tail -n +6 | xargs -r gcloud app versions delete --quiet
           name: Delete app versions beyond 5th version in history
-
+  deploy-backend:
+    docker:
+      - image: google/cloud-sdk:460.0.0
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet app deploy --appyaml=backend.yaml
+          name: Deploy to GCP App Engine
+      - run:
+          command: gcloud app versions list --format="value(version.id)" --sort-by="~version.createTime" | tail -n +6 | xargs -r gcloud app versions delete --quiet
+          name: Delete app versions beyond 5th version in history
 workflows:
   frontend:
     jobs:
@@ -88,3 +119,17 @@ workflows:
   backend:
     jobs:
       - lint-and-test-backend
+      - hold:
+          type: approval
+          requires:
+            - lint-and-test-backend
+          filters:
+            branches:
+              only:
+                - main
+      - build-backend:
+          requires:
+            - hold
+      - deploy-backend:
+          requires:
+            - build-backend
