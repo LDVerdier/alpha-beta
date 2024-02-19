@@ -5,7 +5,16 @@ services:
     build: ./docker/node
     environment:
       NODE_ENV: development
+      VITE_BACKEND_URL: http://localhost:3000/
     ports:
       - 5173:5173
     volumes:
       - ./frontend:/usr/src/
+  backend:
+    build: ./docker/node
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/usr/src/
