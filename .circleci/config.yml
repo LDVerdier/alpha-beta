@@ -55,19 +55,6 @@ jobs:
           root: ./
           paths:
             - dist
-  build-backend:
-    executor:
-      name: node/default
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          command: npm run build
-          name: Build
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - dist
   deploy-frontend:
     docker:
       - image: google/cloud-sdk:460.0.0
@@ -127,9 +114,6 @@ workflows:
             branches:
               only:
                 - main
-      - build-backend:
-          requires:
-            - hold
       - deploy-backend:
           requires:
-            - build-backend
+            - hold
