@@ -6,6 +6,8 @@ commands:
     parameters:
       service:
         type: string
+    docker:
+      - image: google/cloud-sdk:460.0.0
     steps:
       - attach_workspace:
           at: .
@@ -88,8 +90,6 @@ jobs:
           command: gcloud app versions list --format="value(version.id)" --sort-by="~version.createTime" | tail -n +6 | xargs -r gcloud app versions delete --quiet
           name: Delete app versions beyond 5th version in history
   deploy-backend:
-    docker:
-      - image: google/cloud-sdk:460.0.0
     steps:
       - deploy:
           service: "backend"
