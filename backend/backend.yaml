@@ -2,12 +2,11 @@ runtime: nodejs18
 
 service: backend
 
+vpc_access_connector:
+  name: projects/abiding-orb-411412/locations/europe-west/connectors/alpha-beta-connector
+
 env_variables:
-  # prettier-ignore
-  POSTGRES_USER: "alpha-beta-user"
-  # prettier-ignore
-  POSTGRES_PASSWORD: "alpha-beta-password"
-  # prettier-ignore
-  POSTGRES_DB: "alpha-beta-db"
-  # prettier-ignore
-  DATABASE_HOST: "34.78.244.237"
+  POSTGRES_USER: 'alpha-beta-user'
+  POSTGRES_PASSWORD: 'alpha-beta-password'
+  POSTGRES_DB: 'alpha-beta-db'
+  DATABASE_HOST: '34.78.244.237'
