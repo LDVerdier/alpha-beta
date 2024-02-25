@@ -1,6 +1,16 @@
 version: "2.0"
 
 services:
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: alpha_beta
+      POSTGRES_USER: alpha_beta
+      POSTGRES_PASSWORD: alpha_beta
+    ports:
+      - 5432:5432
+    volumes:
+      - ./alpha_beta_db:/var/lib/postgresql/data
   frontend:
     build: ./docker/node
     environment:
@@ -18,3 +28,5 @@ services:
       - 8080:8080
     volumes:
       - ./backend:/usr/src/
+volumes:
+  alpha_beta_db:
