@@ -1,6 +1,23 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.3
+commands:
+  deploy:
+    parameters:
+      service:
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet app deploy --appyaml=<<parameters.service>>.yaml
+          name: Deploy to GCP App Engine
+      - run:
+          command: gcloud app versions list --format="value(version.id)" --sort-by="~version.createTime" --service=<<parameters.service>> | tail -n +6 | xargs -r gcloud app versions delete --quiet
+          name: Delete app versions beyond 5th version in history
 jobs:
   lint-and-test-frontend:
     executor:
@@ -74,17 +91,9 @@ jobs:
     docker:
       - image: google/cloud-sdk:460.0.0
     steps:
-      - attach_workspace:
-          at: .
-      - run:
-          command: |
-            echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-            gcloud --quiet app deploy --appyaml=backend.yaml
-          name: Deploy to GCP App Engine
-      - run:
-          command: gcloud app versions list --format="value(version.id)" --sort-by="~version.createTime" | tail -n +6 | xargs -r gcloud app versions delete --quiet
-          name: Delete app versions beyond 5th version in history
+      - deploy:
+        sevice: "backend"
+
 workflows:
   frontend:
     jobs:
