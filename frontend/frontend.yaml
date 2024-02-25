@@ -11,3 +11,6 @@ handlers:
   - url: /.*
     static_files: dist/index.html
     upload: dist/index.html
+
+env_variables:
+  VITE_BACKEND_URL: 'https://backend-dot-abiding-orb-411412.ew.r.appspot.com/'
