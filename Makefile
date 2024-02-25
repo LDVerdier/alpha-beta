@@ -3,6 +3,7 @@ DOCKER_COMP = docker-compose
 
 # Docker containers
 FRONTEND_RUN = $(DOCKER_COMP) run --rm frontend
+BACKEND_RUN = $(DOCKER_COMP) run --rm backend
 
 help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
@@ -22,13 +23,30 @@ lint: ## Lint the frontend
 
 # Test commands
 
-test: ## Unit tests for the frontend
+test-frontend: ## Unit tests for the frontend
 	@$(FRONTEND_RUN) npm run test
 
-test-e2e: ## E2E tests for the frontend
+test-backend: ## Unit tests for the backend
+	@$(BACKEND_RUN) npm run test
+
+test-e2e-frontend: ## E2E tests for the frontend
 	@$(FRONTEND_RUN) npm run test:e2e
+
+test-e2e-backend: ## E2E tests for the backend
+	@$(BACKEND_RUN) npm run test:e2e
 
 # Build commands
 
 build: ## Build the frontend
 	@$(FRONTEND_RUN) npm run build
+
+# Database commands
+
+migration-run: ## Run the database migrations
+	@$(BACKEND_RUN) npm run migration:run
+
+migration-generate: ## Generate a migration file based on the schemas changes. Example: make migration-generate name=<MigrationName>
+	@$(BACKEND_RUN) npm run typeorm migration:generate ./src/persistence/migrations/$(name)
+
+purge-db: ## Drop the database, run the migrations and run the seeders
+	@$(BACKEND_RUN) npm run purge:db

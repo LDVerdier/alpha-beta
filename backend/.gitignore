@@ -2,6 +2,7 @@
 /dist
 /node_modules
 /build
+alpha_beta_db
 
 # Logs
 logs
