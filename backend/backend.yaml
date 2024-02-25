@@ -3,7 +3,11 @@ runtime: nodejs18
 service: backend
 
 env_variables:
-  POSTGRES_USER: 'alpha-beta-user'
-  POSTGRES_PASSWORD: 'alpha-beta-password'
-  POSTGRES_DB: 'alpha-beta-db'
-  DATABASE_HOST: '34.78.244.237'
+  # prettier-ignore
+  POSTGRES_USER: "alpha-beta-user"
+  # prettier-ignore
+  POSTGRES_PASSWORD: "alpha-beta-password"
+  # prettier-ignore
+  POSTGRES_DB: "alpha-beta-db"
+  # prettier-ignore
+  DATABASE_HOST: "34.78.244.237"
