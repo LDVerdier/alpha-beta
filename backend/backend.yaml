@@ -1,11 +1,9 @@
 runtime: nodejs18
 
 service: backend
-# vpc_access_connector:
-#   name: projects/abiding-orb-411412/locations/europe-west/connectors/alpha-beta-connector
 
-# env_variables:
-#   POSTGRES_USER: 'alpha-beta-user'
-#   POSTGRES_PASSWORD: 'alpha-beta-password'
-#   POSTGRES_DB: 'alpha-beta-db'
-#   DATABASE_HOST: '34.78.244.237'
+env_variables:
+  POSTGRES_USER: 'alpha-beta-user'
+  POSTGRES_PASSWORD: 'alpha-beta-password'
+  POSTGRES_DB: 'alpha-beta-db'
+  DATABASE_HOST: '/cloudsql/abiding-orb-411412:europe-west1:alpha-beta-database'
