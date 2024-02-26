@@ -50,3 +50,6 @@ migration-generate: ## Generate a migration file based on the schemas changes. E
 
 purge-db: ## Drop the database, run the migrations and run the seeders
 	@$(BACKEND_RUN) npm run purge:db
+
+drop-db: ## Drop the database
+	@$(BACKEND_RUN) npm run database:drop
