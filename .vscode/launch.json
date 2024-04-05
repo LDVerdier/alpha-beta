@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to Frontend",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}/frontend",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/src/*"
+      }
+    },
+    {
+      "name": "Attach to Backend",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "restart": true,
+      "address": "0.0.0.0",
+      "localRoot": "${workspaceFolder}/backend",
+      "remoteRoot": "/usr/src"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Attach to Both",
+      "configurations": ["Attach to Frontend", "Attach to Backend"]
+    }
+  ]
+}

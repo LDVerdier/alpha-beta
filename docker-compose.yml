@@ -25,6 +25,7 @@ services:
       - ./frontend:/usr/src/
   backend:
     build: ./docker/node
+    command: npm run start:debug
     environment:
       NODE_ENV: development
       DATABASE_HOST: database
@@ -35,6 +36,7 @@ services:
       - database
     ports:
       - 8080:8080
+      - 9229:9229
     volumes:
       - ./backend:/usr/src/
 volumes:
